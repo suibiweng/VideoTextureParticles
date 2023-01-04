@@ -4,15 +4,15 @@ Shader  /*ase_name*/"Hidden/Universal/Decal"/*end*/
     {
         /*ase_props*/
 
-        [HideInInspector]_DrawOrder("Draw Order", Range(-50, 50)) = 0
-        [HideInInspector][Enum(Depth Bias, 0, View Bias, 1)]_DecalMeshBiasType("DecalMesh BiasType", Float) = 0
+        [HideInInspector] _DrawOrder("Draw Order", Range(-50, 50)) = 0
+        [HideInInspector][Enum(Depth Bias, 0, View Bias, 1)] _DecalMeshBiasType("DecalMesh BiasType", Float) = 0
 
-        [HideInInspector]_DecalMeshDepthBias("DecalMesh DepthBias", Float) = 0
-        [HideInInspector]_DecalMeshViewBias("DecalMesh ViewBias", Float) = 0
+        [HideInInspector] _DecalMeshDepthBias("DecalMesh DepthBias", Float) = 0
+        [HideInInspector] _DecalMeshViewBias("DecalMesh ViewBias", Float) = 0
 
-        [HideInInspector][NoScaleOffset]unity_Lightmaps("unity_Lightmaps", 2DArray) = "" {}
-        [HideInInspector][NoScaleOffset]unity_LightmapsInd("unity_LightmapsInd", 2DArray) = "" {}
-        [HideInInspector][NoScaleOffset]unity_ShadowMasks("unity_ShadowMasks", 2DArray) = "" {}
+        [HideInInspector][NoScaleOffset] unity_Lightmaps("unity_Lightmaps", 2DArray) = "" {}
+        [HideInInspector][NoScaleOffset] unity_LightmapsInd("unity_LightmapsInd", 2DArray) = "" {}
+        [HideInInspector][NoScaleOffset] unity_ShadowMasks("unity_ShadowMasks", 2DArray) = "" {}
 
         //_DecalAngleFadeSupported("Decal Angle Fade Supported", Float) = 1
     }
@@ -80,7 +80,12 @@ Shader  /*ase_name*/"Hidden/Universal/Decal"/*end*/
         }
 
 		HLSLINCLUDE
-		#pragma target 4.5
+		#pragma target 3.5
+		#pragma prefer_hlslcc gles
+		#pragma exclude_renderers d3d9 // ensure rendering platforms toggle list is visible
+
+		#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
+		#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Filtering.hlsl"
 		ENDHLSL
 
 		/*ase_pass*/
